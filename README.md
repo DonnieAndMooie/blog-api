@@ -1,0 +1,1 @@
+An API which has been created to be used on the frontend of my Blog project from the NodeJS path of The Odin Project.
