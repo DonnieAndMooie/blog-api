@@ -12,7 +12,7 @@ router.post("/login", UserController.login_post);
 
 router.get("/users", passport.authenticate("jwt", { session: false }), UserController.users_get);
 
-router.get("/users/:userId", UserController.user_get);
+router.get("/users/:userId", passport.authenticate("jwt", { session: false }), UserController.user_get);
 
 router.get("/blogs", BlogController.blogs_get);
 

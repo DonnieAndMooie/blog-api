@@ -77,10 +77,12 @@ exports.login_post = [
   },
 ];
 
-exports.users_get = (req, res) => {
-  res.json({ message: "Protected route accessed" });
+exports.users_get = async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
 };
 
-exports.user_get = (req, res) => {
-
+exports.user_get = async (req, res) => {
+  const user = await User.findById(req.params.userId);
+  res.json(user);
 };
