@@ -10,7 +10,7 @@ router.post("/sign-up", UserController.sign_up_post);
 
 router.post("/login", UserController.login_post);
 
-router.get("/users", passport.authenticate("jwt", { sesssion: false }), UserController.users_get);
+router.get("/users", passport.authenticate("jwt", { session: false }), UserController.users_get);
 
 router.get("/users/:userId", UserController.user_get);
 

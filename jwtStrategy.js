@@ -13,7 +13,7 @@ module.exports = new JwtStrategy(opts, async (payload, done) => {
   console.log(payload);
   const user = await User.findOne({ username: payload.username });
   if (user) {
-    return done(null, user);
+    return done(null, true);
   }
   return done(null, false, { message: "User does not exist" });
 });
