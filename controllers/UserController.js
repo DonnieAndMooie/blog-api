@@ -63,7 +63,7 @@ exports.login_post = [
     bcrypt.compare(req.body.password, user.password, (err, resolved) => {
       if (resolved) {
         const opts = {};
-        opts.expiresIn = "1h";
+        opts.expiresIn = "24h";
         const secret = process.env.SECRET_KEY;
         const token = jwt.sign({ username: user.username }, secret, opts);
         return res.status(200).json({

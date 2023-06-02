@@ -18,20 +18,20 @@ router.get("/blogs", BlogController.blogs_get);
 
 router.get("/blogs/:blogId", BlogController.blog_get);
 
-router.post("/blog", BlogController.blog_post);
+router.post("/blogs", passport.authenticate("jwt", { session: false }), BlogController.blog_post);
 
-router.put("/blog/:blogId", BlogController.blog_update);
+router.put("/blogs/:blogId", passport.authenticate("jwt", { session: false }), BlogController.blog_update);
 
-router.delete("/blog/:blogId", BlogController.blog_delete);
+router.delete("/blogs/:blogId", BlogController.blog_delete);
 
-router.post("/blog/:blogId/comment", CommentController.comment_post);
+router.post("/blogs/:blogId/comments", CommentController.comment_post);
 
-router.put("/blog/:blogId/comment/:commentId", CommentController.comment_update);
+router.put("/blogs/:blogId/comments/:commentId", CommentController.comment_update);
 
-router.delete("/blog/:blog:Id/comment/:commentId", CommentController.comment_delete);
+router.delete("/blog/:blog:Id/comments/:commentId", CommentController.comment_delete);
 
-router.get("/blog/:blogId/comments/", CommentController.comments_get);
+router.get("/blogs/:blogId/comments/", CommentController.comments_get);
 
-router.get("/blog/:blogId/comment/:commentId", CommentController.comment_get);
+router.get("/blogs/:blogId/comments/:commentId", CommentController.comment_get);
 
 module.exports = router;
