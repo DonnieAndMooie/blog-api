@@ -1,6 +1,14 @@
 const { body, validationResult } = require("express-validator");
 const Blog = require("../models/Blog");
 
+function isAdmin(user) {
+  if (user.admin) {
+    return true;
+  }
+
+  return false;
+}
+
 exports.blogs_get = async (req, res) => {
   const blogs = await Blog.find({});
   res.json(blogs);
@@ -31,13 +39,15 @@ exports.blog_post = [
     .withMessage("Content must be at least 100 characters"),
 
   async (req, res) => {
+    if (!isAdmin(req.user)) {
+      res.json({ message: "You must be an admin to post blogs" });
+    }
+
     const errors = validationResult(req);
 
     if (errors.array().length > 0) {
       return res.json(errors.array());
     }
-
-    console.log(req.user);
 
     const blog = new Blog({
       title: req.body.title,
@@ -68,6 +78,11 @@ exports.blog_update = [
     .escape()
     .withMessage("Content must be at least 100 characters"),
   async (req, res) => {
+
+    if (!isAdmin(req.user)) {
+      res.json({ message: "You must be an admin to post blogs" });
+    }
+
     const errors = validationResult(req);
 
     if (errors.array().length > 0) {
@@ -91,6 +106,10 @@ exports.blog_update = [
   }];
 
 exports.blog_delete = async (req, res) => {
+  if (!isAdmin(req.user)) {
+    res.json({ message: "You must be an admin to delete blogs" });
+  }
+
   try {
     const deletedBlog = await Blog.findByIdAndDelete(req.params.blogId);
     res.json(deletedBlog);
