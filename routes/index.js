@@ -22,13 +22,13 @@ router.post("/blogs", passport.authenticate("jwt", { session: false }), BlogCont
 
 router.put("/blogs/:blogId", passport.authenticate("jwt", { session: false }), BlogController.blog_update);
 
-router.delete("/blogs/:blogId", BlogController.blog_delete);
+router.delete("/blogs/:blogId", passport.authenticate("jwt", { session: false }), BlogController.blog_delete);
 
-router.post("/blogs/:blogId/comments", CommentController.comment_post);
+router.post("/blogs/:blogId/comments", passport.authenticate("jwt", { session: false }), CommentController.comment_post);
 
-router.put("/blogs/:blogId/comments/:commentId", CommentController.comment_update);
+router.put("/blogs/:blogId/comments/:commentId", passport.authenticate("jwt", { session: false }), CommentController.comment_update);
 
-router.delete("/blog/:blog:Id/comments/:commentId", CommentController.comment_delete);
+router.delete("/blogs/:blog:Id/comments/:commentId", passport.authenticate("jwt", { session: false }), CommentController.comment_delete);
 
 router.get("/blogs/:blogId/comments/", CommentController.comments_get);
 
