@@ -82,7 +82,7 @@ exports.comment_delete = async (req, res) => {
 
 exports.comments_get = async (req, res) => {
   try {
-    const comments = await Comment.find({ blog: req.params.blogId });
+    const comments = await Comment.find({ blog: req.params.blogId }).populate("author");
     res.json(comments);
   } catch (err) {
     res.status(404).json({
@@ -94,7 +94,7 @@ exports.comments_get = async (req, res) => {
 
 exports.comment_get = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.commentId);
+    const comment = await Comment.findById(req.params.commentId).populate("author");
     res.json(comment);
   } catch (err) {
     res.status(404).json({
