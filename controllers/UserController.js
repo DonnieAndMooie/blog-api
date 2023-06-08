@@ -69,6 +69,7 @@ exports.login_post = [
         return res.status(200).json({
           message: "Auth passed",
           token,
+          userId: user._id
         });
       }
 
