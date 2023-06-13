@@ -78,7 +78,6 @@ exports.blog_update = [
     .escape()
     .withMessage("Content must be at least 100 characters"),
   async (req, res) => {
-
     if (!isAdmin(req.user)) {
       res.json({ message: "You must be an admin to post blogs" });
     }
@@ -92,6 +91,7 @@ exports.blog_update = [
     const changes = {
       title: req.body.title,
       content: req.body.content,
+      published: req.body.published,
     };
 
     try {
